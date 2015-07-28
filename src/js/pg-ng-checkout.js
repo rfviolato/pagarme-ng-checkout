@@ -2,22 +2,25 @@
 (function(){
 
 	angular.module('pg-ng-checkout', [])
-	.provider('$pgCheckout' PgCheckout);
+	.provider('$pgCheckout', PgCheckout);
 
 	function PgCheckout(){
 
-		console.log('provider up!');
+		var apiKey;
 
 		return{
 
 			//injectable service
 			$get: $get,
+
 			//config methods
 			setApiKey: setApiKey,
 
 		}
 
-		function setApiKey(){
+		function setApiKey(key){
+
+			apiKey = key;
 			
 		}
 
