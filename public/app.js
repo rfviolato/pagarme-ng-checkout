@@ -13,19 +13,7 @@
 
 	function run($pgCheckout){
 
-		var checkoutPromise = $pgCheckout.getCheckout();
-
-		checkoutPromise.then(function(checkout){
-
-			console.log(checkout);
-			
-		});
-
-		checkoutPromise.then(function(checkout){
-
-			console.log(checkout);
-			
-		});
+		$pgCheckout.open({"customerData":false, "amount":"100000", "createToken": "false"});
 		
 	}
 	

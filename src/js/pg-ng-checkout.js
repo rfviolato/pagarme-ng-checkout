@@ -29,30 +29,44 @@
 			var checkout;
 			var get = {
 
-				getCheckout: getCheckout,
+				open: open,
 
 			};
 
 			return get;
 
-			function getCheckout(){
+			function open(params){
+
+				_getInstance().then(function(checkout){
+
+					checkout.open(params);
+					
+				});
+				
+			}
+
+			function _getInstance(){
 
 
 				var promise = $q(function(resolve, reject){
 
 					var elapsedTime = 0;
-					var intervalTime = 70;
+					var intervalTime = 20;
 					var interval = $interval(function(){
 
 						if(PagarMeCheckout){
 
 							if(PagarMeCheckout.Checkout && _encryptKey){
 
-								checkout = new PagarMeCheckout.Checkout({'encryption_key': _encryptKey});
+								if(!checkout){
+
+									checkout = new PagarMeCheckout.Checkout({'encryption_key': _encryptKey});
+
+								}
 
 								$interval.cancel(interval);
-
 								resolve(checkout);
+								
 
 							}
 
@@ -65,7 +79,7 @@
 
 						elapsedTime += intervalTime;
 						
-					},intervalTime);
+					}, intervalTime);
 
 					
 				});
