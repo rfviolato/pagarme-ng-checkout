@@ -3,7 +3,7 @@
 
 	angular.module('pg-ng-checkout-demo', ['pg-ng-checkout'])
 	.config(config)
-	.run(run);
+	.directive('checkoutBtn', CheckoutBtn);
 
 	function config($pgCheckoutProvider){
 
@@ -11,13 +11,29 @@
 		
 	}
 
-	function run($pgCheckout){
+	function CheckoutBtn($pgCheckout){
 
-		$pgCheckout.open({"customerData":false, "amount":"100000", "createToken": "false"}, t);
+		var directive = {
 
-		function t(){
+			link: postLink,
 
-			console.log('and we have a callback!');
+		};
+
+		return directive;
+
+		function postLink($scope, $element){
+
+			$element.on('click', function(){
+
+				$pgCheckout.open({"customerData":false, "amount":"100000", "createToken": "false"}, callback);
+
+				function callback(){
+
+					console.log('Purchase Done!');
+					
+				}
+				
+			});
 			
 		}
 		
