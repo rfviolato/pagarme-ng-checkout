@@ -35,9 +35,9 @@
 
 			return get;
 
-			function open(params){
+			function open(params, success){
 
-				_getInstance().then(function(checkout){
+				_getInstance(success).then(function(checkout){
 
 					checkout.open(params);
 					
@@ -45,7 +45,7 @@
 				
 			}
 
-			function _getInstance(){
+			function _getInstance(success){
 
 
 				var promise = $q(function(resolve, reject){
@@ -58,14 +58,10 @@
 
 							if(PagarMeCheckout.Checkout && _encryptKey){
 
-								if(!checkout){
-
-									checkout = new PagarMeCheckout.Checkout({'encryption_key': _encryptKey});
-
-								}
+								var _data = {'encryption_key': _encryptKey, success: success};
 
 								$interval.cancel(interval);
-								resolve(checkout);
+								resolve(new PagarMeCheckout.Checkout(_data));
 								
 
 							}

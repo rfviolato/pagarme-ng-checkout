@@ -13,7 +13,13 @@
 
 	function run($pgCheckout){
 
-		$pgCheckout.open({"customerData":false, "amount":"100000", "createToken": "false"});
+		$pgCheckout.open({"customerData":false, "amount":"100000", "createToken": "false"}, t);
+
+		function t(){
+
+			console.log('and we have a callback!');
+			
+		}
 		
 	}
 	
