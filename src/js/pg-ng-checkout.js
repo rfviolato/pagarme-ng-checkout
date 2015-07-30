@@ -1,5 +1,5 @@
 'use strict';
-(function(){
+(function(window){
 
 	angular.module('pg-ng-checkout', [])
 	.provider('$pgCheckout', PgCheckout);
@@ -37,11 +37,19 @@
 
 			function open(params, success){
 
-				_getInstance(success).then(function(checkout){
+				_getInstance(success).then(ok, error);
+
+				function ok(checkout){
 
 					checkout.open(params);
 					
-				});
+				}
+
+				function error(){
+
+					console.error('No Pagar.me checkout found. Did you import it?');
+					
+				}
 				
 			}
 
@@ -51,12 +59,13 @@
 				var promise = $q(function(resolve, reject){
 
 					var elapsedTime = 0;
-					var intervalTime = 20;
+					var intervalTime = 100;
+
 					var interval = $interval(function(){
 
-						if(PagarMeCheckout){
+						if(window.PagarMeCheckout){
 
-							if(PagarMeCheckout.Checkout && _encryptKey){
+							if(window.PagarMeCheckout.Checkout && _encryptKey){
 
 								var _data = {'encryption_key': _encryptKey, success: success};
 
@@ -66,7 +75,7 @@
 
 							}
 
-						}else if(elapsedTime === 10000){
+						}else if(elapsedTime === 3000){
 
 							$interval.cancel(interval);
 							reject('load timeout');
