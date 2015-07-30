@@ -46,7 +46,7 @@ gulp.task('clean:dest', function(cb){
 
 gulp.task('build', ['style', 'clean:dest'], function(){
 
-  var js = gulp.src('src/js/pg-ng-range.js')
+  var js = gulp.src('src/js/pg-ng-checkout.js')
            .pipe(gulp.dest('dest/js'))
            .pipe(uglify({mangle: false}))
            .pipe(rename(function(path){

@@ -6,18 +6,11 @@ Angular service to provide pagar.me checkout functionality to your Angularjs app
 
 ## Instructions
 
-Install pagarme-ng-checkout via npm:
-
-```
-$ npm install pagarme-ng-checkout
-```
-
-
 Import both pagar.me checkout.js and pagarme-ng-checkout.js
 
 ```html
 <script src="https://assets.pagar.me/checkout/checkout.js"></script>
-<script src="node_modules/angular/angular.min.js"></script>
+<script src="lib/pg-ng-checkout.js"></script>
 ```
 
 Import into your application and on the config stage set your pagar.me encryption key (test or live)
